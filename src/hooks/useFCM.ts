@@ -2,32 +2,35 @@
 
 import { useEffect, useState } from 'react';
 import useFCMToken from './useFCMToken';
-import { messaging } from '../utils/firebase/';
-import { MessagePayload, onMessage } from 'firebase/messaging';
+import { MessagePayload, getMessaging, onMessage } from 'firebase/messaging';
 import { toast } from 'react-toastify';
+import firebaseApp from '../utils/firebase/';
 
 const useFCM = () => {
-	const fcmToken = useFCMToken();
+	const { token, notificationPermissionStatus } = useFCMToken();
 	const [messages, setMessages] = useState<MessagePayload[]>([]);
 
 	useEffect(() => {
-		if ('serviceWorker' in navigator) {
-			const fcmMessaging = messaging();
-			const unsubscribe = onMessage(fcmMessaging, (payload) => {
-				console.log('Foreground push notification received:', payload);
-				toast.dark(payload.notification?.title);
-				setMessages((prev) => [...prev, payload]);
-				// Handle the received push notification while the app is in the foreground
-				// You can display a notification or update the UI based on the payload
-			});
+		if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+			if (notificationPermissionStatus === 'granted') {
+				const messaging = getMessaging(firebaseApp);
 
-			return () => {
-				unsubscribe();
-			};
+				const unsubscribe = onMessage(messaging, (payload) => {
+					console.log('Foreground push notification received:', payload);
+					toast.dark(payload.notification?.title);
+					setMessages((prev) => [...prev, payload]);
+					// Handle the received push notification while the app is in the foreground
+					// You can display a notification or update the UI based on the payload
+				});
+
+				return () => {
+					unsubscribe();
+				};
+			}
 		}
-	}, [fcmToken]);
+	}, [notificationPermissionStatus]);
 
-	return { fcmToken, messages };
+	return { token, messages };
 };
 
 export default useFCM;

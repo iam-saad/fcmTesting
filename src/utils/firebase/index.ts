@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 'use client';
 import { type FirebaseOptions, initializeApp } from 'firebase/app';
-import { getMessaging } from 'firebase/messaging';
 // import { getAnalytics } from 'firebase/analytics';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,6 +20,6 @@ const firebaseConfig: FirebaseOptions = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-export const messaging = () => getMessaging(firebaseApp);
+// export const messaging = () => getMessaging(firebaseApp);
 
 export default firebaseApp;
