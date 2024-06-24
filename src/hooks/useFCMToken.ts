@@ -23,7 +23,8 @@ const useFCMToken = () => {
 					);
 
 					const token = await getToken(messaging(), {
-						vapidKey: `BKlaB-_AAy0zEMgtMnUb2FHGikN5CbzdZy6bW2CFtddX-9cmt5kYYI2uMQIJ1bZJcaKVDcXjLv1o4LpTnh-ENTc `,
+						vapidKey:
+							'BKlaB-_AAy0zEMgtMnUb2FHGikN5CbzdZy6bW2CFtddX-9cmt5kYYI2uMQIJ1bZJcaKVDcXjLv1o4LpTnh-ENTc',
 						serviceWorkerRegistration: registration,
 					});
 

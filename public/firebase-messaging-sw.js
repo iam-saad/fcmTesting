@@ -1,6 +1,6 @@
 importScripts('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
 importScripts(
-	'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js'
+	'https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js'
 );
 
 const firebaseConfig = {
@@ -15,6 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
