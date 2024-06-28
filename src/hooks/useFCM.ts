@@ -21,9 +21,7 @@ const useFCM = () => {
 				// You can display a notification or update the UI based on the payload
 			});
 
-			return () => {
-				unsubscribe();
-			};
+			return () => unsubscribe();
 		}
 	}, [fcmToken]);
 

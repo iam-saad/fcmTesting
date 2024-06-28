@@ -2,7 +2,6 @@
 'use client';
 import { type FirebaseOptions, initializeApp } from 'firebase/app';
 import { getMessaging } from 'firebase/messaging';
-// import { getAnalytics } from 'firebase/analytics';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -10,13 +9,13 @@ import { getMessaging } from 'firebase/messaging';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig: FirebaseOptions = {
-	apiKey: 'AIzaSyDuG-bbefK5YaDPKfvsNteiAyKKpsf_EnQ',
-	authDomain: 'testing-fcm-d04e6.firebaseapp.com',
-	projectId: 'testing-fcm-d04e6',
-	storageBucket: 'testing-fcm-d04e6.appspot.com',
-	messagingSenderId: '918216641010',
-	appId: '1:918216641010:web:3deb470adaa013bdf7436b',
-	measurementId: 'G-56731QRR41',
+	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+	measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

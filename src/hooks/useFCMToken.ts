@@ -7,7 +7,7 @@ import useNotificationPermission from './useNotificationPermission';
 
 const useFCMToken = () => {
 	const permission = useNotificationPermission();
-	const [fcmToken, setFcmToken] = useState('');
+	const [fcmToken, setFcmToken] = useState<string | null>(null);
 
 	useEffect(() => {
 		const retrieveToken = async () => {
@@ -17,15 +17,8 @@ const useFCMToken = () => {
 					const isFCMSupported = await isSupported();
 					if (!isFCMSupported) return;
 
-					const registration = await navigator.serviceWorker.register(
-						'/firebase-messaging-sw.js',
-						{ type: 'module' }
-					);
-
 					const token = await getToken(messaging(), {
-						vapidKey:
-							'BKlaB-_AAy0zEMgtMnUb2FHGikN5CbzdZy6bW2CFtddX-9cmt5kYYI2uMQIJ1bZJcaKVDcXjLv1o4LpTnh-ENTc',
-						serviceWorkerRegistration: registration,
+						vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
 					});
 
 					if (token) {
